@@ -1,7 +1,7 @@
-package org.jetbrains.plugins.template.services
+package com.github.selcukguvel.jsonviewplugin.services
 
+import com.github.selcukguvel.jsonviewplugin.MyBundle
 import com.intellij.openapi.project.Project
-import org.jetbrains.plugins.template.MyBundle
 
 class MyProjectService(project: Project) {
 
