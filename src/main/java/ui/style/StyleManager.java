@@ -18,7 +18,7 @@ public class StyleManager {
         Style style = doc.addStyle("JsonKeyStyle", null);
         StyleConstants.setFontSize(style, 16);
         StyleConstants.setFontFamily(style, "Helvetica");
-        StyleConstants.setForeground(style, Colors.JsonKey);
+        StyleConstants.setForeground(style, Colors.jsonKey);
 
         return style;
     }

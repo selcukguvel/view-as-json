@@ -3,9 +3,9 @@ package ui.style;
 import java.awt.*;
 
 public class Colors {
-    public final static Color JsonTextPaneBackground = Color.decode("#2b2b2b");
+    public final static Color jsonTextPaneBackground = Color.decode("#2b2b2b");
     public final static Color defaultText = Color.decode("#e0e0e0");
-    public final static Color JsonKey = Color.decode("#B90A0A");
+    public final static Color jsonKey = Color.decode("#B90A0A");
     public final static Color stringJsonValue = Color.decode("#169723");
     public final static Color integerJsonValue = Color.decode("#6632D3");
     public final static Color booleanJsonValue = Color.decode("#C0622E");
