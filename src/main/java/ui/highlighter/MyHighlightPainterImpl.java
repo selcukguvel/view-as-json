@@ -21,10 +21,10 @@ public class MyHighlightPainterImpl implements MyHighlightPainter {
             Rectangle matchingLine = textPane.getMatchingLine(caretLine);
             if (matchingLine != null) {
                 if (!caretLine.equals(matchingLine)) {
-                    draw(g, Colors.matchingLine, matchingLine);
+                    draw(g, Colors.matchingLineBackground, matchingLine);
                 }
             }
-            draw(g, Colors.caretLine, caretLine);
+            draw(g, Colors.caretLineBackground, caretLine);
         } catch (BadLocationException ignored) {
         }
     }
