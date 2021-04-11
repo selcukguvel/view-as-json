@@ -62,13 +62,13 @@ public class BracketMatcher {
         }
     }
 
-    public Integer getMatchingBracketLocation(Rectangle highlightingRectangle, HighlightableTextPane textPane) {
+    public Rectangle getMatchingBracketLine(Rectangle highlightingRectangle) {
         BracketLine matchingBracketLine = bracketLinePairMap.get(new BracketLine(highlightingRectangle));
 
         if (matchingBracketLine == null) {
             return null;
         }
 
-        return textPane.viewToModel(matchingBracketLine.getLine().getLocation());
+        return matchingBracketLine.getLine();
     }
 }

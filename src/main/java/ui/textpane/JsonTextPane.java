@@ -36,7 +36,7 @@ public class JsonTextPane extends HighlightableTextPane {
     }
 
     private void init() {
-        setBackground(Colors.JsonTextPaneBackground);
+        setBackground(Colors.jsonTextPaneBackground);
         setMargin(JBUI.insets(20));
         setCaretColor(getBackground());
 
@@ -69,11 +69,10 @@ public class JsonTextPane extends HighlightableTextPane {
     }
 
     @Override
-    public Rectangle getMatchingLine(Rectangle caretLine) throws BadLocationException {
-        Integer matchingBracketLocation = bracketMatcher.getMatchingBracketLocation(caretLine, this);
+    public Rectangle getMatchingLine(Rectangle caretLine) {
+        Rectangle matchingBracketLine = bracketMatcher.getMatchingBracketLine(caretLine);
         Rectangle matchingBracketRectangle = null;
-        if (matchingBracketLocation != null) {
-            Rectangle matchingBracketLine = modelToView(matchingBracketLocation);
+        if (matchingBracketLine != null) {
             matchingBracketRectangle = new Rectangle(0, matchingBracketLine.y, getWidth(), matchingBracketLine.height);
         }
         return matchingBracketRectangle;
@@ -82,31 +81,29 @@ public class JsonTextPane extends HighlightableTextPane {
     @Override
     public void scrollToMatchingLine() {
         SwingUtilities.invokeLater(() -> {
-            Rectangle caretLine;
             try {
-                caretLine = getCaretLine();
-                Integer matchingBracketLocation = bracketMatcher.getMatchingBracketLocation(caretLine, this);
+                Rectangle caretLine = getCaretLine();
+                Rectangle matchingBracketLine = bracketMatcher.getMatchingBracketLine(caretLine);
 
-                if (matchingBracketLocation != null) {
-                    Rectangle newCaretLine = modelToView(matchingBracketLocation);
+                if (matchingBracketLine != null) {
                     Rectangle visibleWindow = getVisibleRect();
 
-                    boolean isNewCaretLineBelow = newCaretLine.y > caretLine.y;
+                    boolean isNewCaretLineBelow = matchingBracketLine.y > caretLine.y;
                     if (isNewCaretLineBelow) {
-                        if (newCaretLine.y >= (visibleWindow.y + visibleWindow.height)) {
-                            int newScrollBarValue = newCaretLine.y - (visibleWindow.height / 2);
+                        if (matchingBracketLine.y >= (visibleWindow.y + visibleWindow.height)) {
+                            int newScrollBarValue = matchingBracketLine.y - (visibleWindow.height / 2);
                             scrollPane.getVerticalScrollBar().setValue(newScrollBarValue);
                         }
                     } else {
-                        if (newCaretLine.y <= visibleWindow.y) {
-                            int newScrollBarValue = newCaretLine.y;
+                        if (matchingBracketLine.y <= visibleWindow.y) {
+                            int newScrollBarValue = matchingBracketLine.y;
                             newScrollBarValue -= caretLine.height;
                             scrollPane.getVerticalScrollBar().setValue(newScrollBarValue);
                         }
                     }
 
-                    setCaretPosition(matchingBracketLocation);
-                    repaint(0, newCaretLine.y, getWidth(), newCaretLine.height);
+                    setCaretPosition(viewToModel(matchingBracketLine.getLocation()));
+                    repaint(0, matchingBracketLine.y, getWidth(), matchingBracketLine.height);
                 }
             } catch (BadLocationException ignored) {
             }
