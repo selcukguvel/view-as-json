@@ -16,4 +16,12 @@
         <listener class="com.github.selcukguvel.jsonviewplugin.listeners.MyProjectManagerListener"
                   topic="com.intellij.openapi.project.ProjectManagerListener"/>
     </applicationListeners>
+
+    <actions>
+        <action id="org.jetbrains.plugins.template.ViewAsJsonAction"
+                class="org.jetbrains.plugins.template.ViewAsJsonAction" text="View as JSON"
+                description="View as JSON">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
 </idea-plugin>
