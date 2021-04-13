@@ -11,6 +11,10 @@ public class MatchIntervalList {
         this.matchIntervalList = new ArrayList<>();
     }
 
+    public List<MatchInterval> getMatchIntervalList() {
+        return matchIntervalList;
+    }
+
     public void add(MatchInterval matchInterval) {
         matchIntervalList.add(matchInterval);
     }
