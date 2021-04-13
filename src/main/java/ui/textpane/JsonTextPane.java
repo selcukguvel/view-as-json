@@ -24,7 +24,7 @@ public class JsonTextPane extends HighlightableTextPane {
         this.textPaneListener = new JsonTextPaneListenerImpl(highlighter, this);
         this.scrollPane = scrollPane;
 
-        setSize(new Dimension(650, 480));
+        setSize(new Dimension(960, 720));
         init();
 
         try {

@@ -21,13 +21,13 @@ public class JsonViewerDialog extends DialogWrapper {
         this.scrollPane = new JBScrollPane();
         this.jsonTextPane = new JsonTextPane(scrollPane, jsonString);
         init();
-        setTitle("View as Json");
+        setTitle("View as JSON");
     }
 
     @Override
     protected JComponent createCenterPanel() {
         JPanel dialogPanel = new JPanel();
-        dialogPanel.setPreferredSize(new Dimension(650, 480));
+        dialogPanel.setPreferredSize(new Dimension(960, 720));
 
         scrollPane.getViewport().add(jsonTextPane);
         scrollPane.setPreferredSize(dialogPanel.getPreferredSize());
