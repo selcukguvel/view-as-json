@@ -17,6 +17,10 @@ public class BracketMatcher {
         this.bracketLinePairMap = new HashMap<>();
     }
 
+    public Map<BracketLine, BracketLine> getBracketLinePairMap() {
+        return bracketLinePairMap;
+    }
+
     public void populateBrackets(String json, HighlightableTextPane textPane) throws BadLocationException {
         Pattern bracketMatcherRegex = Pattern.compile("[{}\\[\\]]");
         Matcher matcher = bracketMatcherRegex.matcher(json);
@@ -62,8 +66,8 @@ public class BracketMatcher {
         }
     }
 
-    public Rectangle getMatchingBracketLine(Rectangle highlightingRectangle) {
-        BracketLine matchingBracketLine = bracketLinePairMap.get(new BracketLine(highlightingRectangle));
+    public Rectangle getMatchingBracketLine(Rectangle currentLine) {
+        BracketLine matchingBracketLine = getBracketLinePairMap().get(new BracketLine(currentLine));
 
         if (matchingBracketLine == null) {
             return null;
