@@ -1,6 +1,7 @@
 package ui.textpane;
 
 import com.intellij.util.ui.JBUI;
+import ui.bracket.Bracket;
 import ui.highlighter.MyHighlighterImpl;
 import ui.bracket.BracketMatcher;
 import ui.style.Colors;
@@ -10,6 +11,7 @@ import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.util.List;
 
 import static ui.style.StyleManager.*;
 
@@ -51,7 +53,8 @@ public class JsonTextPane extends HighlightableTextPane {
 
     public void addContent(String jsonString) throws BadLocationException {
         addStyledContentToDocument(jsonString);
-        bracketMatcher.populateBrackets(jsonString, this);
+        List<Bracket> matchingBrackets = bracketMatcher.getMatchingBrackets(jsonString);
+        bracketMatcher.populateBrackets(matchingBrackets, this);
         setCaretPosition(0);
     }
 

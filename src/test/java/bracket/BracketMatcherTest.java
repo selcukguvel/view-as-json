@@ -3,13 +3,68 @@ package bracket;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
+import ui.bracket.Bracket;
 import ui.bracket.BracketLine;
 import ui.bracket.BracketMatcher;
+import ui.textpane.HighlightableTextPane;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.swing.text.BadLocationException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class BracketMatcherTest {
+
+    @Test
+    public void populateBracketsTest() throws BadLocationException {
+        BracketMatcher bracketMatcher = new BracketMatcher();
+
+        HighlightableTextPane textPane = Mockito.mock(HighlightableTextPane.class);
+        Mockito.when(textPane.modelToView(Mockito.anyInt())).thenAnswer(
+                invocation -> {
+                    int bracketIndex = (int) invocation.getArguments()[0];
+                    return BracketTestData.getLine(10, bracketIndex);
+                }
+        );
+
+        List<Bracket> brackets = Arrays.asList(
+                new Bracket("{", 0),
+                new Bracket("[", 70),
+                new Bracket("]", 100),
+                new Bracket("}", 102)
+        );
+        List<BracketLine> bracketLines = brackets.stream().map(bracket ->
+                BracketTestData.getBracketLine(10, bracket.getIndex())
+        ).collect(Collectors.toList());
+
+        bracketMatcher.populateBrackets(brackets, textPane);
+        Map<BracketLine, BracketLine> bracketLinePairMap = bracketMatcher.getBracketLinePairMap();
+
+        Assert.assertEquals(bracketLines.get(1), bracketLinePairMap.get(bracketLines.get(2)));
+        Assert.assertEquals(bracketLines.get(2), bracketLinePairMap.get(bracketLines.get(1)));
+
+        Assert.assertEquals(bracketLines.get(0), bracketLinePairMap.get(bracketLines.get(3)));
+        Assert.assertEquals(bracketLines.get(3), bracketLinePairMap.get(bracketLines.get(0)));
+    }
+
+    @Test
+    public void getMatchingBracketsTest() {
+        BracketMatcher bracketMatcher = new BracketMatcher();
+        String jsonString = BracketTestData.getJsonString();
+
+        List<Bracket> expectedBrackets = Arrays.asList(
+                new Bracket("{", 0),
+                new Bracket("[", 70),
+                new Bracket("]", 100),
+                new Bracket("}", 102)
+        );
+
+        List<Bracket> matchingBrackets = bracketMatcher.getMatchingBrackets(jsonString);
+
+        Assert.assertEquals(
+                expectedBrackets,
+                matchingBrackets
+        );
+    }
 
     @Test
     public void getMatchingBracketLineTest() {

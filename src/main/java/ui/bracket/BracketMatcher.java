@@ -4,9 +4,8 @@ import ui.textpane.HighlightableTextPane;
 
 import javax.swing.text.BadLocationException;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,34 +20,46 @@ public class BracketMatcher {
         return bracketLinePairMap;
     }
 
-    public void populateBrackets(String json, HighlightableTextPane textPane) throws BadLocationException {
-        Pattern bracketMatcherRegex = Pattern.compile("[{}\\[\\]]");
-        Matcher matcher = bracketMatcherRegex.matcher(json);
+    public void populateBrackets(List<Bracket> matchingBrackets, HighlightableTextPane textPane)
+            throws BadLocationException {
 
         Stack<Bracket> stack = new Stack<>();
-
-        while (matcher.find()) {
-            int matchingStartIndex = matcher.start();
-
-            String bracket = json.substring(matchingStartIndex, matchingStartIndex + 1);
+        for (Bracket bracket : matchingBrackets) {
+            int bracketIndex = bracket.getIndex();
+            String bracketString = bracket.getText();
 
             boolean isMatchingBracket = false;
             if (!stack.isEmpty()) {
-                isMatchingBracket = checkMatching(stack.peek().getText(), bracket);
+                isMatchingBracket = checkMatching(stack.peek().getText(), bracketString);
             }
 
             if (isMatchingBracket) {
-                int lastBracketOffset = stack.pop().getOffset();
+                int lastBracketIndex = stack.pop().getIndex();
 
-                BracketLine bracketLine = new BracketLine(textPane.modelToView(matchingStartIndex));
-                BracketLine matchingBracketLine = new BracketLine(textPane.modelToView(lastBracketOffset));
+                BracketLine bracketLine = new BracketLine(textPane.modelToView(bracketIndex));
+                BracketLine matchingBracketLine = new BracketLine(textPane.modelToView(lastBracketIndex));
 
                 bracketLinePairMap.put(bracketLine, matchingBracketLine);
                 bracketLinePairMap.put(matchingBracketLine, bracketLine);
             } else {
-                stack.push(new Bracket(bracket, matchingStartIndex));
+                stack.push(new Bracket(bracketString, bracketIndex));
             }
         }
+    }
+
+    public List<Bracket> getMatchingBrackets(String json) {
+        Pattern bracketMatcherRegex = Pattern.compile("[{}\\[\\]]");
+        Matcher matcher = bracketMatcherRegex.matcher(json);
+
+        List<Bracket> matchingBrackets = new ArrayList<>();
+        while (matcher.find()) {
+            int matchingStartIndex = matcher.start();
+            String bracket = json.substring(matchingStartIndex, matchingStartIndex + 1);
+
+            matchingBrackets.add(new Bracket(bracket, matchingStartIndex));
+        }
+
+        return matchingBrackets;
     }
 
     private boolean checkMatching(String lastBracketInStack, String currentBracket) {
