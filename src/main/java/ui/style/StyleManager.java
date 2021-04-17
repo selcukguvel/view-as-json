@@ -1,60 +1,61 @@
 package ui.style;
 
 import javax.swing.text.Style;
-import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
+
+import static javax.swing.text.StyleConstants.*;
 
 public class StyleManager {
     public static Style getDefaultStyle(StyledDocument doc) {
         Style style = doc.addStyle("DefaultStyle", null);
-        StyleConstants.setFontSize(style, 16);
-        StyleConstants.setFontFamily(style, "Helvetica");
-        StyleConstants.setForeground(style, Colors.defaultText);
+        style.addAttribute(FontSize, 16);
+        style.addAttribute(FontFamily, "Helvetica");
+        style.addAttribute(Foreground, Colors.defaultText);
 
         return style;
     }
 
     public static Style getJsonKeyStyle(StyledDocument doc) {
         Style style = doc.addStyle("JsonKeyStyle", null);
-        StyleConstants.setFontSize(style, 16);
-        StyleConstants.setFontFamily(style, "Helvetica");
-        StyleConstants.setForeground(style, Colors.jsonKey);
+        style.addAttribute(FontSize, 16);
+        style.addAttribute(FontFamily, "Helvetica");
+        style.addAttribute(Foreground, Colors.jsonKey);
 
         return style;
     }
 
     public static Style getStringJsonValueStyle(StyledDocument doc) {
         Style style = doc.addStyle("StringJsonValueStyle", null);
-        StyleConstants.setFontSize(style, 16);
-        StyleConstants.setFontFamily(style, "Helvetica");
-        StyleConstants.setForeground(style, Colors.stringJsonValue);
+        style.addAttribute(FontSize, 16);
+        style.addAttribute(FontFamily, "Helvetica");
+        style.addAttribute(Foreground, Colors.stringJsonValue);
 
         return style;
     }
 
     public static Style getIntegerJsonValueStyle(StyledDocument doc) {
         Style style = doc.addStyle("IntegerJsonValueStyle", null);
-        StyleConstants.setFontSize(style, 16);
-        StyleConstants.setFontFamily(style, "Helvetica");
-        StyleConstants.setForeground(style, Colors.integerJsonValue);
+        style.addAttribute(FontSize, 16);
+        style.addAttribute(FontFamily, "Helvetica");
+        style.addAttribute(Foreground, Colors.integerJsonValue);
 
         return style;
     }
 
     public static Style getBooleanJsonValueStyle(StyledDocument doc) {
         Style style = doc.addStyle("BooleanJsonValueStyle", null);
-        StyleConstants.setFontSize(style, 16);
-        StyleConstants.setFontFamily(style, "Helvetica");
-        StyleConstants.setForeground(style, Colors.booleanJsonValue);
+        style.addAttribute(FontSize, 16);
+        style.addAttribute(FontFamily, "Helvetica");
+        style.addAttribute(Foreground, Colors.booleanJsonValue);
 
         return style;
     }
 
     public static Style getNullJsonValueStyle(StyledDocument doc) {
         Style style = doc.addStyle("NullJsonValueStyle", null);
-        StyleConstants.setFontSize(style, 16);
-        StyleConstants.setFontFamily(style, "Helvetica");
-        StyleConstants.setForeground(style, Colors.nullJsonValue);
+        style.addAttribute(FontSize, 16);
+        style.addAttribute(FontFamily, "Helvetica");
+        style.addAttribute(Foreground, Colors.nullJsonValue);
 
         return style;
     }
