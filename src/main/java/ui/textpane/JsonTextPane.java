@@ -13,8 +13,6 @@ import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.util.List;
 
-import static ui.style.StyleManager.*;
-
 public class JsonTextPane extends HighlightableTextPane {
     private final BracketMatcher bracketMatcher;
     private final JsonTextPaneListener textPaneListener;
@@ -60,7 +58,6 @@ public class JsonTextPane extends HighlightableTextPane {
 
     private void addStyledContentToDocument(String jsonString) throws BadLocationException {
         StyledDocument doc = (StyledDocument) getDocument();
-        doc.insertString(0, jsonString, getDefaultStyle(doc));
         new JsonStyleManager(doc).format(jsonString);
     }
 

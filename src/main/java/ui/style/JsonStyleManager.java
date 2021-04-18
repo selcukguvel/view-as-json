@@ -3,13 +3,13 @@ package ui.style;
 import ui.match.MatchInterval;
 import ui.match.MatchIntervalList;
 
+import javax.swing.text.BadLocationException;
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static ui.style.StyleManager.*;
-import static ui.style.StyleManager.getIntegerJsonValueStyle;
 
 public class JsonStyleManager {
 
@@ -19,7 +19,9 @@ public class JsonStyleManager {
         this.doc = doc;
     }
 
-    public void format(String jsonString) {
+    public void format(String jsonString) throws BadLocationException {
+        doc.insertString(0, jsonString, getDefaultStyle(doc));
+
         Pattern keyMatcherRegex = Pattern.compile("\".*\":");
         Matcher keyMatcher = keyMatcherRegex.matcher(jsonString);
 
@@ -40,7 +42,7 @@ public class JsonStyleManager {
         String matchedJsonValue = jsonString.substring(start, matchedKeyStartIndex);
 
         MatchIntervalList stringMatchIntervals = matchWithStringJsonValue(matchedJsonValue, start);
-        matchWithIntegerJsonValue(stringMatchIntervals, matchedJsonValue, start);
+        matchWithNumberJsonValue(stringMatchIntervals, matchedJsonValue, start);
         matchWithBooleanJsonValue(stringMatchIntervals, matchedJsonValue, start);
         matchWithNullJsonValue(stringMatchIntervals, matchedJsonValue, start);
     }
@@ -73,9 +75,9 @@ public class JsonStyleManager {
         matchWithNonStringJsonValue(stringMatchIntervals, matchedJsonValue, nullJsonValueRegex, start, getNullJsonValueStyle(doc));
     }
 
-    private void matchWithIntegerJsonValue(MatchIntervalList stringMatchIntervals, String matchedJsonValue, int start) {
-        String integerJsonValueRegex = "\\b\\d*\\.?\\d+\\b";
-        matchWithNonStringJsonValue(stringMatchIntervals, matchedJsonValue, integerJsonValueRegex, start, getIntegerJsonValueStyle(doc));
+    private void matchWithNumberJsonValue(MatchIntervalList stringMatchIntervals, String matchedJsonValue, int start) {
+        String numberJsonValueRegex = "\\b\\d*\\.?\\d+\\b";
+        matchWithNonStringJsonValue(stringMatchIntervals, matchedJsonValue, numberJsonValueRegex, start, getNumberJsonValueStyle(doc));
     }
 
     private void matchWithNonStringJsonValue(MatchIntervalList stringMatchIntervals, String matchedJsonValue, String JsonValueRegex, int start, Style style) {
