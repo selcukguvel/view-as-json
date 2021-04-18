@@ -32,6 +32,10 @@ public class JsonTextPaneListenerImpl implements JsonTextPaneListener {
         highlighter.highlightMatchingLines();
     }
 
+    @Override
+    public void caretUpdate(CaretEvent e) {
+        highlighter.highlightMatchingLines();
+    }
 
     @Override
     public void mouseDragged(MouseEvent e) {
@@ -40,11 +44,6 @@ public class JsonTextPaneListenerImpl implements JsonTextPaneListener {
 
     @Override
     public void mouseMoved(MouseEvent e) {
-    }
-
-    @Override
-    public void caretUpdate(CaretEvent e) {
-        highlighter.highlightMatchingLines();
     }
 
     @Override
