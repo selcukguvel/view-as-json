@@ -33,11 +33,11 @@ public class StyleManager {
         return style;
     }
 
-    public static Style getIntegerJsonValueStyle(StyledDocument doc) {
-        Style style = doc.addStyle("IntegerJsonValueStyle", null);
+    public static Style getNumberJsonValueStyle(StyledDocument doc) {
+        Style style = doc.addStyle("NumberJsonValueStyle", null);
         style.addAttribute(FontSize, 16);
         style.addAttribute(FontFamily, "Helvetica");
-        style.addAttribute(Foreground, Colors.integerJsonValue);
+        style.addAttribute(Foreground, Colors.numberJsonValue);
 
         return style;
     }

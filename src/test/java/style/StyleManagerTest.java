@@ -50,14 +50,14 @@ public class StyleManagerTest {
     }
 
     @Test
-    public void getIntegerJsonValueStyleTest() {
+    public void getNumberJsonValueStyleTest() {
         StyledDocument doc = Mockito.mock(StyledDocument.class);
         Style style = Mockito.mock(Style.class);
 
         Mockito.when(doc.addStyle(Mockito.anyString(), Mockito.any())).thenReturn(style);
-        StyleManager.getIntegerJsonValueStyle(doc);
+        StyleManager.getNumberJsonValueStyle(doc);
 
-        verifyStyleAttributes(style, 16, "Helvetica", Colors.integerJsonValue);
+        verifyStyleAttributes(style, 16, "Helvetica", Colors.numberJsonValue);
     }
 
     @Test
