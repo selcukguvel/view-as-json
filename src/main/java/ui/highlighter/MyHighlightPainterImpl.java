@@ -29,7 +29,7 @@ public class MyHighlightPainterImpl implements MyHighlightPainter {
         }
     }
 
-    public void draw(Graphics g, Color color, Rectangle rect) {
+    private void draw(Graphics g, Color color, Rectangle rect) {
         g.setColor(color);
         g.fillRect(rect.x, rect.y, rect.width, rect.height);
     }
