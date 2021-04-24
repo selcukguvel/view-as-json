@@ -1,6 +1,6 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# json-view-plugin Changelog
+# view-as-json Changelog
 
 ## [Unreleased]
 ### Added

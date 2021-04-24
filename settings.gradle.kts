@@ -1,1 +1,1 @@
-rootProject.name = "json-view-plugin"
+rootProject.name = "view-as-json"
