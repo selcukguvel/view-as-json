@@ -4,6 +4,7 @@ import ui.match.MatchInterval;
 import ui.match.MatchIntervalList;
 
 import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 import java.util.regex.Matcher;
@@ -12,11 +13,10 @@ import java.util.regex.Pattern;
 import static ui.style.StyleManager.*;
 
 public class JsonStyleManager {
-
     private final StyledDocument doc;
 
-    public JsonStyleManager(StyledDocument doc) {
-        this.doc = doc;
+    public JsonStyleManager(JTextComponent textComponent) {
+        this.doc = (StyledDocument) textComponent.getDocument();
     }
 
     public void format(String jsonString) throws BadLocationException {

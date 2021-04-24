@@ -9,6 +9,7 @@ import ui.style.JsonStyleManager;
 import ui.style.StyleManager;
 
 import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;
 
@@ -21,7 +22,10 @@ public class JsonStyleManagerTest {
     @Test
     public void formatTest() throws BadLocationException {
         String jsonString = StyleTestData.getCountryJsonString();
+
         StyledDocument doc = Mockito.mock(StyledDocument.class);
+        JTextComponent textComponent = Mockito.mock(JTextComponent.class);
+        Mockito.when(textComponent.getDocument()).thenReturn(doc);
 
         Style defaultStyle = Mockito.mock(Style.class);
         Style jsonKeyStyle = Mockito.mock(Style.class);
@@ -44,7 +48,7 @@ public class JsonStyleManagerTest {
             styleManager.when(() -> StyleManager.getNullJsonValueStyle(doc))
                 .thenReturn(nullJsonValueStyle);
 
-            JsonStyleManager jsonStyleManager = new JsonStyleManager(doc);
+            JsonStyleManager jsonStyleManager = new JsonStyleManager(textComponent);
             jsonStyleManager.format(jsonString);
 
             verifyDefaultStyle(doc, defaultStyle, jsonString);

@@ -2,7 +2,6 @@ package ui.highlighter;
 
 import ui.textpane.HighlightableTextPane;
 
-import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
@@ -21,30 +20,30 @@ public class MyHighlighterImpl implements MyHighlighter {
     }
 
     public void highlightMatchingLines() {
-        SwingUtilities.invokeLater(() -> {
-            try {
-                Rectangle caretLine = textPane.getCaretLine();
-                Rectangle matchingLine = textPane.getMatchingLine(caretLine);
+        try {
+            Rectangle caretLine = textPane.getCaretLine();
+            Rectangle matchingLine = textPane.getMatchingLine(caretLine);
 
-                if (isDifferentBracketPairSelected(caretLine)) {
-                    removeHighlightedLines();
-                    highlightNewLines(caretLine, matchingLine);
-                }
-            } catch (BadLocationException ignored) {
+            if (isDifferentBracketPairSelected(caretLine)) {
+                removeHighlightedLines();
+                highlightNewLines(caretLine, matchingLine);
             }
-        });
+        } catch (BadLocationException ignored) {
+        }
     }
 
     private void removeHighlightedLines() {
+        JTextComponent textComponent = textPane.getTextComponent();
         for (Rectangle line : highlightedLines) {
-            textPane.repaint(0, line.y, textPane.getWidth(), line.height);
+            textComponent.repaint(0, line.y, textComponent.getWidth(), line.height);
         }
     }
 
     private void highlightNewLines(Rectangle caretLine, Rectangle matchingLine) {
-        textPane.repaint(0, caretLine.y, textPane.getWidth(), caretLine.height);
+        JTextComponent textComponent = textPane.getTextComponent();
+        textComponent.repaint(0, caretLine.y, textComponent.getWidth(), caretLine.height);
         if (matchingLine != null)
-            textPane.repaint(0, matchingLine.y, textPane.getWidth(), matchingLine.height);
+            textComponent.repaint(0, matchingLine.y, textComponent.getWidth(), matchingLine.height);
 
         highlightedLines.clear();
         highlightedLines.add(caretLine);
@@ -71,9 +70,10 @@ public class MyHighlighterImpl implements MyHighlighter {
 
     @Override
     public void paint(Graphics g) {
+        JTextComponent textComponent = textPane.getTextComponent();
         Graphics2D g2d = (Graphics2D) g.create();
         try {
-            this.painter.paint(g2d, 0, 0, this.textPane.getBounds(), this.textPane);
+            painter.paint(g2d, 0, 0, textComponent.getBounds(), textComponent);
         } finally {
             g2d.dispose();
         }

@@ -1,8 +1,7 @@
 package ui.bracket;
 
-import ui.textpane.HighlightableTextPane;
-
 import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -20,8 +19,8 @@ public class BracketMatcher {
         return bracketLinePairMap;
     }
 
-    public void populateBrackets(List<Bracket> matchingBrackets, HighlightableTextPane textPane)
-            throws BadLocationException {
+    public void populateBrackets(List<Bracket> matchingBrackets, JTextComponent textComponent)
+        throws BadLocationException {
 
         Stack<Bracket> stack = new Stack<>();
         for (Bracket bracket : matchingBrackets) {
@@ -36,8 +35,8 @@ public class BracketMatcher {
             if (isMatchingBracket) {
                 int lastBracketIndex = stack.pop().getIndex();
 
-                BracketLine bracketLine = new BracketLine(textPane.modelToView(bracketIndex));
-                BracketLine matchingBracketLine = new BracketLine(textPane.modelToView(lastBracketIndex));
+                BracketLine bracketLine = new BracketLine(textComponent.modelToView(bracketIndex));
+                BracketLine matchingBracketLine = new BracketLine(textComponent.modelToView(lastBracketIndex));
 
                 bracketLinePairMap.put(bracketLine, matchingBracketLine);
                 bracketLinePairMap.put(matchingBracketLine, bracketLine);
