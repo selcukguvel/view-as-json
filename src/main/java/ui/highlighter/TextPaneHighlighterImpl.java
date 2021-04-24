@@ -19,46 +19,50 @@ public class TextPaneHighlighterImpl implements TextPaneHighlighter {
         this.highlightedLines = new ArrayList<>();
     }
 
+    public TextPaneHighlightPainter getPainter() {
+        return painter;
+    }
+
+    public HighlightableTextPane getTextPane() {
+        return textPane;
+    }
+
+    public List<Rectangle> getHighlightedLines() {
+        return highlightedLines;
+    }
+
+    @Override
     public void highlightMatchingLines() {
         try {
-            Rectangle caretLine = textPane.getCaretLine();
-            Rectangle matchingLine = textPane.getMatchingLine(caretLine);
+            Rectangle caretLine = getTextPane().getCaretLine();
+            Rectangle matchingLine = getTextPane().getMatchingLine(caretLine);
 
-            if (isDifferentBracketPairSelected(caretLine)) {
-                removeHighlightedLines();
-                highlightNewLines(caretLine, matchingLine);
-            }
+            // TODO Prevent highlighting if same caret line is selected
+            removeHighlightedLines();
+            highlightNewLines(caretLine, matchingLine);
         } catch (BadLocationException ignored) {
         }
     }
 
     private void removeHighlightedLines() {
-        JTextComponent textComponent = textPane.getTextComponent();
-        for (Rectangle line : highlightedLines) {
+        JTextComponent textComponent = getTextPane().getTextComponent();
+        for (Rectangle line : getHighlightedLines()) {
             textComponent.repaint(0, line.y, textComponent.getWidth(), line.height);
         }
     }
 
     private void highlightNewLines(Rectangle caretLine, Rectangle matchingLine) {
-        JTextComponent textComponent = textPane.getTextComponent();
+        JTextComponent textComponent = getTextPane().getTextComponent();
         textComponent.repaint(0, caretLine.y, textComponent.getWidth(), caretLine.height);
         if (matchingLine != null)
             textComponent.repaint(0, matchingLine.y, textComponent.getWidth(), matchingLine.height);
 
-        highlightedLines.clear();
-        highlightedLines.add(caretLine);
+        getHighlightedLines().clear();
+        getHighlightedLines().add(caretLine);
         if (matchingLine != null)
-            highlightedLines.add(matchingLine);
+            getHighlightedLines().add(matchingLine);
     }
 
-    public boolean isDifferentBracketPairSelected(Rectangle highlightedLine) {
-        for (Rectangle line : highlightedLines) {
-            if (line.y == highlightedLine.y) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     @Override
     public void install(JTextComponent c) {
@@ -70,10 +74,10 @@ public class TextPaneHighlighterImpl implements TextPaneHighlighter {
 
     @Override
     public void paint(Graphics g) {
-        JTextComponent textComponent = textPane.getTextComponent();
+        JTextComponent textComponent = getTextPane().getTextComponent();
         Graphics2D g2d = (Graphics2D) g.create();
         try {
-            painter.paint(g2d, 0, 0, textComponent.getBounds(), textComponent);
+            getPainter().paint(g2d, 0, 0, textComponent.getBounds(), textComponent);
         } finally {
             g2d.dispose();
         }

@@ -15,8 +15,8 @@ public class BracketTestData {
         return new BracketLine(line);
     }
 
-    public static Rectangle getLine(int lineX, int lineY) {
-        return new Rectangle(lineX, lineY, 200, 20);
+    public static Rectangle getLine(int x, int y) {
+        return new Rectangle(x, y, 200, 20);
     }
 
     public static String getJsonString() {

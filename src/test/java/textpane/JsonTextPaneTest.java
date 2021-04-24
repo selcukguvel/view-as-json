@@ -84,13 +84,13 @@ public class JsonTextPaneTest {
         Rectangle mockMatchingLine = TextPaneTestData.getLine(10, 40);
         Mockito.when(bracketMatcher.getMatchingBracketLine(caretLine)).thenReturn(mockMatchingLine);
 
-        int mockTextComponentWidth = 200;
-        Mockito.when(textComponent.getWidth()).thenReturn(mockTextComponentWidth);
+        int textComponentWidth = 200;
+        Mockito.when(textComponent.getWidth()).thenReturn(textComponentWidth);
 
         Rectangle matchingLine = jsonTextPane.getMatchingLine(caretLine);
 
         Assert.assertEquals(
-            new Rectangle(0, mockMatchingLine.y, mockTextComponentWidth, mockMatchingLine.height),
+            new Rectangle(0, mockMatchingLine.y, textComponentWidth, mockMatchingLine.height),
             matchingLine
         );
     }
@@ -166,12 +166,12 @@ public class JsonTextPaneTest {
         Rectangle visibleWindow = TextPaneTestData.getVisibleWindow(40);
         stubTextComponent(visibleWindow, matchingLine);
 
-        JScrollBar mockVerticalScrollBar = Mockito.mock(JScrollBar.class);
-        Mockito.when(scrollPane.getVerticalScrollBar()).thenReturn(mockVerticalScrollBar);
+        JScrollBar verticalScrollBar = Mockito.mock(JScrollBar.class);
+        Mockito.when(scrollPane.getVerticalScrollBar()).thenReturn(verticalScrollBar);
 
         jsonTextPane.scrollToMatchingLine(caretLine);
 
-        Mockito.verify(mockVerticalScrollBar).setValue(matchingLine.y - caretLine.height);
+        Mockito.verify(verticalScrollBar).setValue(matchingLine.y - caretLine.height);
         verifyMatchingLineRepaint(matchingLine, visibleWindow);
     }
 

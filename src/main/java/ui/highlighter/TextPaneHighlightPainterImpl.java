@@ -19,10 +19,8 @@ public class TextPaneHighlightPainterImpl implements TextPaneHighlightPainter {
         try {
             Rectangle caretLine = textPane.getCaretLine();
             Rectangle matchingLine = textPane.getMatchingLine(caretLine);
-            if (matchingLine != null) {
-                if (!caretLine.equals(matchingLine)) {
-                    draw(g, Colors.matchingLineBackground, matchingLine);
-                }
+            if (matchingLine != null && !caretLine.equals(matchingLine)) {
+                draw(g, Colors.matchingLineBackground, matchingLine);
             }
             draw(g, Colors.caretLineBackground, caretLine);
         } catch (BadLocationException ignored) {
