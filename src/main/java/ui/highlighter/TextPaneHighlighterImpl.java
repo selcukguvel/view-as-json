@@ -8,14 +8,14 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyHighlighterImpl implements MyHighlighter {
-    private final MyHighlightPainter painter;
+public class TextPaneHighlighterImpl implements TextPaneHighlighter {
+    private final TextPaneHighlightPainter painter;
     private final HighlightableTextPane textPane;
     private final List<Rectangle> highlightedLines;
 
-    public MyHighlighterImpl(HighlightableTextPane textPane) {
+    public TextPaneHighlighterImpl(HighlightableTextPane textPane) {
         this.textPane = textPane;
-        this.painter = new MyHighlightPainterImpl(textPane);
+        this.painter = new TextPaneHighlightPainterImpl(textPane);
         this.highlightedLines = new ArrayList<>();
     }
 

@@ -7,7 +7,7 @@ import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 import ui.bracket.Bracket;
 import ui.bracket.BracketMatcher;
-import ui.highlighter.MyHighlighterImpl;
+import ui.highlighter.TextPaneHighlighterImpl;
 import ui.style.JsonStyleManager;
 import ui.textpane.JsonTextPane;
 import ui.textpane.JsonTextPaneListener;
@@ -41,7 +41,7 @@ public class JsonTextPaneTest {
     public void testEnableHighlighter() {
         jsonTextPane.enableHighlighter();
 
-        Mockito.verify(textComponent).setHighlighter(Mockito.any(MyHighlighterImpl.class));
+        Mockito.verify(textComponent).setHighlighter(Mockito.any(TextPaneHighlighterImpl.class));
         Mockito.verify(textComponent).addKeyListener(Mockito.any(JsonTextPaneListener.class));
         Mockito.verify(textComponent).addMouseMotionListener(Mockito.any(JsonTextPaneListener.class));
         Mockito.verify(textComponent).addCaretListener(Mockito.any(JsonTextPaneListener.class));

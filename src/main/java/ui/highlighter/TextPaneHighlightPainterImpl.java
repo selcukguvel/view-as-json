@@ -7,10 +7,10 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import java.awt.*;
 
-public class MyHighlightPainterImpl implements MyHighlightPainter {
+public class TextPaneHighlightPainterImpl implements TextPaneHighlightPainter {
     private final HighlightableTextPane textPane;
 
-    public MyHighlightPainterImpl(HighlightableTextPane textPane) {
+    public TextPaneHighlightPainterImpl(HighlightableTextPane textPane) {
         this.textPane = textPane;
     }
 

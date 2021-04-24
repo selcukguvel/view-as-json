@@ -1,6 +1,6 @@
 package ui.textpane;
 
-import ui.highlighter.MyHighlighter;
+import ui.highlighter.TextPaneHighlighter;
 
 import javax.swing.event.CaretEvent;
 import javax.swing.text.BadLocationException;
@@ -9,10 +9,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class JsonTextPaneListenerImpl implements JsonTextPaneListener {
-    private final MyHighlighter highlighter;
+    private final TextPaneHighlighter highlighter;
     private final HighlightableTextPane textPane;
 
-    public JsonTextPaneListenerImpl(MyHighlighter highlighter, HighlightableTextPane textPane) {
+    public JsonTextPaneListenerImpl(TextPaneHighlighter highlighter, HighlightableTextPane textPane) {
         this.highlighter = highlighter;
         this.textPane = textPane;
     }

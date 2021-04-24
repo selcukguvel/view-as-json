@@ -6,7 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import ui.highlighter.MyHighlighter;
+import ui.highlighter.TextPaneHighlighter;
 import ui.textpane.HighlightableTextPane;
 import ui.textpane.JsonTextPaneListenerImpl;
 
@@ -22,7 +22,7 @@ public class JsonTextPaneListenerImplTest {
     private JsonTextPaneListenerImpl jsonTextPaneListenerImpl;
 
     @Mock
-    private MyHighlighter highlighter;
+    private TextPaneHighlighter highlighter;
 
     @Mock
     private HighlightableTextPane textPane;

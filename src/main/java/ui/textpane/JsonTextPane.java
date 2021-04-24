@@ -1,7 +1,7 @@
 package ui.textpane;
 
 import ui.bracket.Bracket;
-import ui.highlighter.MyHighlighterImpl;
+import ui.highlighter.TextPaneHighlighterImpl;
 import ui.bracket.BracketMatcher;
 import ui.style.JsonStyleManager;
 
@@ -35,7 +35,7 @@ public class JsonTextPane implements HighlightableTextPane {
     }
 
     public void enableHighlighter() {
-        MyHighlighterImpl highlighter = new MyHighlighterImpl(this);
+        TextPaneHighlighterImpl highlighter = new TextPaneHighlighterImpl(this);
         textComponent.setHighlighter(highlighter);
 
         JsonTextPaneListener textPaneListener = new JsonTextPaneListenerImpl(highlighter, this);
