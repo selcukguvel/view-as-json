@@ -1,6 +1,12 @@
 package org.jetbrains.plugins.template
 
-import com.google.gson.*
+import com.google.gson.GsonBuilder
+import com.google.gson.JsonArray
+import com.google.gson.JsonNull
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+import com.google.gson.JsonPrimitive
+import com.google.gson.JsonSyntaxException
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
@@ -21,7 +27,7 @@ class ViewAsJsonAction : AnAction() {
 
         val jsonString = getJsonString(selectedText)
         if (jsonString == null) {
-            val errorDialog = ErrorDialog("Make sure you selected a valid Json string");
+            val errorDialog = ErrorDialog("Make sure you selected a valid Json string")
             errorDialog.setResizable(false)
             errorDialog.show()
         } else {
@@ -32,8 +38,8 @@ class ViewAsJsonAction : AnAction() {
     }
 
     private fun getSelectedText(e: AnActionEvent): String {
-        val editor = e.getRequiredData(CommonDataKeys.EDITOR);
-        val document = editor.document;
+        val editor = e.getRequiredData(CommonDataKeys.EDITOR)
+        val document = editor.document
 
         val primaryCaret: Caret = editor.caretModel.primaryCaret
         val start: Int = primaryCaret.selectionStart
@@ -51,9 +57,9 @@ class ViewAsJsonAction : AnAction() {
                 is JsonArray -> gson.toJson(jsonElement.asJsonArray)
                 is JsonPrimitive -> gson.toJson(jsonElement.asJsonPrimitive)
                 is JsonNull -> gson.toJson(jsonElement.asJsonNull)
-                else -> throw Exception()
+                else -> throw JsonSyntaxException("Unrecognized json element type")
             }
-        } catch (e: Exception) {
+        } catch (e: JsonSyntaxException) {
             null
         }
     }
