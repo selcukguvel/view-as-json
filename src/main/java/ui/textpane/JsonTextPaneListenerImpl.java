@@ -3,6 +3,8 @@ package ui.textpane;
 import ui.highlighter.MyHighlighter;
 
 import javax.swing.event.CaretEvent;
+import javax.swing.text.BadLocationException;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -27,7 +29,11 @@ public class JsonTextPaneListenerImpl implements JsonTextPaneListener {
     @Override
     public void keyReleased(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-            textPane.scrollToMatchingLine();
+            try {
+                Rectangle caretLine = textPane.getCaretLine();
+                textPane.scrollToMatchingLine(caretLine);
+            } catch (BadLocationException ignored) {
+            }
         }
         highlighter.highlightMatchingLines();
     }

@@ -11,6 +11,8 @@ import ui.textpane.HighlightableTextPane;
 import ui.textpane.JsonTextPaneListenerImpl;
 
 import javax.swing.event.CaretEvent;
+import javax.swing.text.BadLocationException;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -49,12 +51,16 @@ public class JsonTextPaneListenerImplTest {
     }
 
     @Test
-    public void keyReleasedWithSpaceButtonTest() {
+    public void keyReleasedWithSpaceButtonTest() throws BadLocationException {
         Mockito.when(keyEvent.getKeyCode()).thenReturn(KeyEvent.VK_SPACE);
+
+        Rectangle mockCaretLine = TextPaneTestData.getLine(10, 20);
+        Mockito.when(textPane.getCaretLine()).thenReturn(mockCaretLine);
 
         jsonTextPaneListenerImpl.keyReleased(keyEvent);
 
-        Mockito.verify(textPane).scrollToMatchingLine();
+        Mockito.verify(textPane).getCaretLine();
+        Mockito.verify(textPane).scrollToMatchingLine(mockCaretLine);
         Mockito.verify(highlighter).highlightMatchingLines();
     }
 
