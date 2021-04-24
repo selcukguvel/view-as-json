@@ -12,8 +12,8 @@ import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.editor.Caret
 import com.intellij.openapi.util.TextRange
-import ui.ErrorDialog
-import ui.JsonViewerDialog
+import dialog.ErrorDialog
+import dialog.JsonViewerDialog
 
 class ViewAsJsonAction : AnAction() {
     override fun update(e: AnActionEvent) {

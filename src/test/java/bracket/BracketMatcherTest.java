@@ -3,9 +3,6 @@ package bracket;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-import ui.bracket.Bracket;
-import ui.bracket.BracketLine;
-import ui.bracket.BracketMatcher;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;

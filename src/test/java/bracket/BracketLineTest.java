@@ -2,7 +2,6 @@ package bracket;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ui.bracket.BracketLine;
 
 public class BracketLineTest {
 

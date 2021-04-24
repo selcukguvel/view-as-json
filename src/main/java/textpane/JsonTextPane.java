@@ -1,9 +1,9 @@
-package ui.textpane;
+package textpane;
 
-import ui.bracket.Bracket;
-import ui.highlighter.TextPaneHighlighterImpl;
-import ui.bracket.BracketMatcher;
-import ui.style.JsonStyleManager;
+import bracket.Bracket;
+import highlighter.TextPaneHighlighterImpl;
+import bracket.BracketMatcher;
+import style.JsonStyleManager;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

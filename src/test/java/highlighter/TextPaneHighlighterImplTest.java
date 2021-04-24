@@ -6,9 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import ui.highlighter.TextPaneHighlightPainterImpl;
-import ui.highlighter.TextPaneHighlighterImpl;
-import ui.textpane.HighlightableTextPane;
+import textpane.HighlightableTextPane;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Highlighter;

@@ -1,4 +1,4 @@
-package ui.style;
+package style;
 
 import java.awt.*;
 

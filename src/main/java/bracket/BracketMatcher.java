@@ -1,4 +1,4 @@
-package ui.bracket;
+package bracket;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;

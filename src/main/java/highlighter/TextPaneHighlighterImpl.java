@@ -1,6 +1,6 @@
-package ui.highlighter;
+package highlighter;
 
-import ui.textpane.HighlightableTextPane;
+import textpane.HighlightableTextPane;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;

@@ -1,4 +1,4 @@
-package ui.highlighter;
+package highlighter;
 
 import javax.swing.text.Highlighter;
 

@@ -1,4 +1,4 @@
-package ui.match;
+package match;
 
 import java.util.ArrayList;
 import java.util.List;

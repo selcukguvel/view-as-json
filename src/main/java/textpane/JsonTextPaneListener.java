@@ -1,4 +1,4 @@
-package ui.textpane;
+package textpane;
 
 import javax.swing.event.CaretListener;
 import java.awt.event.KeyListener;

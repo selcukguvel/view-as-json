@@ -2,8 +2,6 @@ package match;
 
 import org.junit.Assert;
 import org.junit.Test;
-import ui.match.MatchInterval;
-import ui.match.MatchIntervalList;
 
 public class MatchIntervalListTest {
 

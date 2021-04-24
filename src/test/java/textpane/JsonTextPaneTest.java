@@ -5,12 +5,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
-import ui.bracket.Bracket;
-import ui.bracket.BracketMatcher;
-import ui.highlighter.TextPaneHighlighterImpl;
-import ui.style.JsonStyleManager;
-import ui.textpane.JsonTextPane;
-import ui.textpane.JsonTextPaneListener;
+import bracket.Bracket;
+import bracket.BracketMatcher;
+import highlighter.TextPaneHighlighterImpl;
+import style.JsonStyleManager;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

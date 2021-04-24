@@ -1,13 +1,13 @@
-package ui;
+package dialog;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.ui.JBUI;
 import org.jetbrains.annotations.NotNull;
-import ui.bracket.BracketMatcher;
-import ui.style.Colors;
-import ui.style.JsonStyleManager;
-import ui.textpane.JsonTextPane;
+import bracket.BracketMatcher;
+import style.Colors;
+import style.JsonStyleManager;
+import textpane.JsonTextPane;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;

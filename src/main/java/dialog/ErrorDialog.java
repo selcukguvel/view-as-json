@@ -1,10 +1,9 @@
-package ui;
+package dialog;
 
 import com.intellij.openapi.ui.DialogWrapper;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class ErrorDialog extends DialogWrapper {
     private final JLabel errorLabel;

@@ -1,4 +1,4 @@
-package ui.style;
+package style;
 
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;

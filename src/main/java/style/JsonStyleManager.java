@@ -1,7 +1,7 @@
-package ui.style;
+package style;
 
-import ui.match.MatchInterval;
-import ui.match.MatchIntervalList;
+import match.MatchInterval;
+import match.MatchIntervalList;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
@@ -10,7 +10,7 @@ import javax.swing.text.StyledDocument;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static ui.style.StyleManager.*;
+import static style.StyleManager.*;
 
 public class JsonStyleManager {
     private final StyledDocument doc;

@@ -6,9 +6,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import ui.highlighter.TextPaneHighlightPainterImpl;
-import ui.style.Colors;
-import ui.textpane.HighlightableTextPane;
+import style.Colors;
+import textpane.HighlightableTextPane;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;

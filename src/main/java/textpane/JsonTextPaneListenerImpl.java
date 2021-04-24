@@ -1,6 +1,6 @@
-package ui.textpane;
+package textpane;
 
-import ui.highlighter.TextPaneHighlighter;
+import highlighter.TextPaneHighlighter;
 
 import javax.swing.event.CaretEvent;
 import javax.swing.text.BadLocationException;

@@ -6,9 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import ui.highlighter.TextPaneHighlighter;
-import ui.textpane.HighlightableTextPane;
-import ui.textpane.JsonTextPaneListenerImpl;
+import highlighter.TextPaneHighlighter;
 
 import javax.swing.event.CaretEvent;
 import javax.swing.text.BadLocationException;

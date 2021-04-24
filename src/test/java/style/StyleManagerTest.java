@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
-import ui.style.Colors;
-import ui.style.StyleManager;
 
 import javax.swing.text.Style;
 import javax.swing.text.StyledDocument;

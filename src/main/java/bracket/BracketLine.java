@@ -1,4 +1,4 @@
-package ui.bracket;
+package bracket;
 
 import java.awt.*;
 import java.util.Objects;

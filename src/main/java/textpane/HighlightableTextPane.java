@@ -1,4 +1,4 @@
-package ui.textpane;
+package textpane;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;

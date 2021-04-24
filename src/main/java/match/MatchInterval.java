@@ -1,4 +1,4 @@
-package ui.match;
+package match;
 
 public class MatchInterval {
     private final int start;

@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
-import ui.style.JsonStyleManager;
-import ui.style.StyleManager;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
