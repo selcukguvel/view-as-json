@@ -1,7 +1,14 @@
 <!-- Keep a Changelog guide -> https://keepachangelog.com -->
 
-# view-as-json Changelog
+# View as JSON Changelog
 
 ## [Unreleased]
 ### Added
-- Initial scaffold created from [IntelliJ Platform Plugin Template](https://github.com/JetBrains/intellij-platform-plugin-template)
+- JSON string formatting
+- JSON key and value coloring
+- Bracket pair highlighting
+- Mouse click support
+    - Mouse clicks for moving through lines
+- Keyboard shortcuts support
+    - Arrow keys for moving through lines
+    - "Space" for scrolling through matching line if there is any
