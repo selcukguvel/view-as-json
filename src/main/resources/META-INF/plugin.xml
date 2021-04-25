@@ -7,10 +7,6 @@
     <!-- https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
     <depends>com.intellij.modules.platform</depends>
 
-    <description>Prettify your JSON string and view colored format. Bracket pair highlighting is supported with keyboard
-        shortcuts.
-    </description>
-
     <extensions defaultExtensionNs="com.intellij">
         <applicationService
                 serviceImplementation="com.github.selcukguvel.jsonviewplugin.services.MyApplicationService"/>

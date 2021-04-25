@@ -14,11 +14,18 @@
 - [ ] Click the <kbd>Watch</kbd> button on the top of the [IntelliJ Platform Plugin Template][template] to be notified about releases containing new features and fixes.
 
 <!-- Plugin description -->
-This Fancy IntelliJ Platform Plugin is going to be your implementation of the brilliant ideas that you have.
+Prettify your JSON string and view colored format. Bracket pair highlighting is supported. You can use 
+keyboard shortcuts and mouse clicks to move through lines.
 
-This specific section is a source for the [plugin.xml](/src/main/resources/META-INF/plugin.xml) file which will be extracted by the [Gradle](/build.gradle.kts) during the build process.
+&nbsp;
 
-To keep everything working, do not remove `<!-- ... -->` sections. 
+How to use it?
+- Select your JSON string and right click on it.
+    - You need to select a valid JSON string, otherwise you will see an error message.
+- Click "View as JSON"
+- Enjoy!
+    - Use arrow keys or mouse clicks to move through lines
+    - Use "Space" to scroll through matching line if there is any
 <!-- Plugin description end -->
 
 ## Installation
