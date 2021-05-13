@@ -15,7 +15,6 @@ import com.intellij.openapi.fileEditor.impl.LoadTextUtil
 import com.intellij.openapi.util.TextRange
 import dialog.ErrorDialog
 import dialog.JsonViewerDialog
-import java.lang.RuntimeException
 
 class ViewAsJsonAction : AnAction() {
     override fun update(e: AnActionEvent) {
@@ -30,7 +29,7 @@ class ViewAsJsonAction : AnAction() {
 
     private fun isJsonFileSelectionMode(e: AnActionEvent): Boolean {
         val virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE)
-        return virtualFile?.extension == "json";
+        return virtualFile?.extension == "json"
     }
 
     override fun actionPerformed(e: AnActionEvent) {
@@ -44,7 +43,7 @@ class ViewAsJsonAction : AnAction() {
                 errorMessage = "Make sure Json file you selected contains a valid Json string"
                 getTextFromJsonFile(e)
             }
-            else -> throw RuntimeException("Invalid mode")
+            else -> throw UnSupportedModeException("Action button is clicked in an unexpected way")
         }
 
         val jsonString = getJsonString(content)
