@@ -13,8 +13,12 @@ Using this **IntelliJ** plugin, you can:
 * Copy formatted JSON string seen on the text pane
 
 ## How to use it?
-* Select your JSON string and right click on it
+* There are two use cases where **View as JSON** button will be visible:
+  * Select your text and right click on it
     * You need to select a valid JSON string, otherwise you will see an error message
+  * Right click on the file with **json** extension
+    * You need to select a JSON file that contains a valid JSON string, otherwise you will see an error message
+
 * Click **View as JSON**
 * Enjoy!
     * Use arrow keys or mouse clicks to move through lines
