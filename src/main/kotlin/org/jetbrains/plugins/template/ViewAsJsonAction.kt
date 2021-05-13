@@ -11,23 +11,45 @@ import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
 import com.intellij.openapi.editor.Caret
+import com.intellij.openapi.fileEditor.impl.LoadTextUtil
 import com.intellij.openapi.util.TextRange
 import dialog.ErrorDialog
 import dialog.JsonViewerDialog
+import java.lang.RuntimeException
 
 class ViewAsJsonAction : AnAction() {
     override fun update(e: AnActionEvent) {
-        val editor = e.getData(CommonDataKeys.EDITOR)
         val presentation = e.presentation
-        presentation.isEnabledAndVisible = editor?.selectionModel?.hasSelection(true) == true
+        presentation.isEnabledAndVisible = isTextSelectionMode(e) || isJsonFileSelectionMode(e)
+    }
+
+    private fun isTextSelectionMode(e: AnActionEvent): Boolean {
+        val editor = e.getData(CommonDataKeys.EDITOR)
+        return editor?.selectionModel?.hasSelection(true) == true
+    }
+
+    private fun isJsonFileSelectionMode(e: AnActionEvent): Boolean {
+        val virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE)
+        return virtualFile?.extension == "json";
     }
 
     override fun actionPerformed(e: AnActionEvent) {
-        val selectedText = getSelectedText(e)
+        val errorMessage: String
+        val content = when {
+            isTextSelectionMode(e) -> {
+                errorMessage = "Make sure you selected a valid Json string"
+                getSelectedText(e)
+            }
+            isJsonFileSelectionMode(e) -> {
+                errorMessage = "Make sure Json file you selected contains a valid Json string"
+                getTextFromJsonFile(e)
+            }
+            else -> throw RuntimeException("Invalid mode")
+        }
 
-        val jsonString = getJsonString(selectedText)
+        val jsonString = getJsonString(content)
         if (jsonString == null) {
-            val errorDialog = ErrorDialog("Make sure you selected a valid Json string")
+            val errorDialog = ErrorDialog(errorMessage)
             errorDialog.setResizable(false)
             errorDialog.show()
         } else {
@@ -46,6 +68,11 @@ class ViewAsJsonAction : AnAction() {
         val end: Int = primaryCaret.selectionEnd
 
         return document.getText(TextRange.create(start, end))
+    }
+
+    private fun getTextFromJsonFile(e: AnActionEvent): String {
+        val virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE)
+        return LoadTextUtil.loadText(virtualFile!!).toString()
     }
 
     private fun getJsonString(content: String?): String? {

@@ -23,6 +23,7 @@
                 class="org.jetbrains.plugins.template.ViewAsJsonAction" text="View as JSON"
                 description="View as JSON">
             <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
         </action>
     </actions>
 </idea-plugin>
