@@ -4,9 +4,9 @@
 
 ## [Unreleased]
 
-### Fixed
+### Added
 
-- ..
+- Support the files with json extension to directly view them
 
 ## [0.1.1]
 
