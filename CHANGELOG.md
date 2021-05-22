@@ -3,6 +3,7 @@
 # View as JSON Changelog
 
 ## [Unreleased]
+## [0.3.0]
 
 ### Added
 
