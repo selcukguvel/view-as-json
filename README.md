@@ -10,7 +10,7 @@ Using this **IntelliJ** plugin, you can:
 * Prettify your JSON string and view colored format
 * Highlight bracket pairs as you move through lines
 * Scroll through matching bracket line
-* Copy formatted JSON string seen on the text pane
+* Copy formatted JSON string seen on the text pane entirely or partially
 
 ## How to use it?
 * There are two use cases where **View as JSON** button will be visible:
@@ -20,6 +20,8 @@ Using this **IntelliJ** plugin, you can:
     * You need to select a JSON file that contains a valid JSON string, otherwise you will see an error message
 
 * Click **View as JSON**
+  * Click **Copy all** button if you want to copy the entire text
+  * Click **Copy interval** button if you want to copy the lines between matching brackets
 * Enjoy!
     * Use arrow keys or mouse clicks to move through lines
     * Use **Space** to scroll through matching bracket line if there is any
