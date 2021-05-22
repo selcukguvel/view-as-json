@@ -69,16 +69,20 @@ public class JsonViewerDialog extends DialogWrapper {
 
     @Override
     protected @NotNull Action[] createActions() {
-        return new Action[]{getCopyAction()};
+        return new Action[]{getCopyIntervalAction(), getCopyAllAction()};
     }
 
-    private Action getCopyAction() {
-        return new CopyAction();
+    private Action getCopyAllAction() {
+        return new CopyAllAction();
     }
 
-    private class CopyAction extends DialogWrapperAction {
-        protected CopyAction() {
-            super("Copy");
+    private Action getCopyIntervalAction() {
+        return new CopyIntervalAction();
+    }
+
+    private class CopyAllAction extends DialogWrapperAction {
+        protected CopyAllAction() {
+            super("Copy all");
         }
 
         @Override
@@ -86,6 +90,56 @@ public class JsonViewerDialog extends DialogWrapper {
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             String text = jsonTextPane.getTextComponent().getText();
             clipboard.setContents(new StringSelection(text), null);
+        }
+    }
+
+    private class CopyIntervalAction extends DialogWrapperAction {
+        protected CopyIntervalAction() {
+            super("Copy interval");
+        }
+
+        @Override
+        protected void doAction(ActionEvent e) {
+            try {
+                JTextComponent jsonTextComponent = jsonTextPane.getTextComponent();
+                String jsonString = jsonTextComponent.getText();
+
+                Rectangle caretLine = jsonTextPane.getCaretLine();
+                int caretLineStartPosition = jsonTextComponent.viewToModel(caretLine.getLocation());
+
+                Rectangle matchingLine = jsonTextPane.getMatchingLine(caretLine);
+
+                int matchingLineEndPosition;
+                if (matchingLine != null) {
+                    int matchingLineStartPosition = jsonTextComponent.viewToModel(matchingLine.getLocation());
+                    if (caretLineStartPosition > matchingLineStartPosition) {
+                        int temp = matchingLineStartPosition;
+                        matchingLineStartPosition = caretLineStartPosition;
+                        caretLineStartPosition = temp;
+                    }
+                    matchingLineEndPosition = getEndPositionOfLine(jsonString, matchingLineStartPosition);
+                } else {
+                    matchingLineEndPosition = getEndPositionOfLine(jsonString, caretLineStartPosition);
+                }
+
+                String text = jsonString.substring(caretLineStartPosition, matchingLineEndPosition);
+
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clipboard.setContents(new StringSelection(text), null);
+            } catch (BadLocationException ignored) {
+            }
+        }
+
+        private int getEndPositionOfLine(String jsonString, int lineStartPosition) {
+            if (lineStartPosition == jsonString.length() - 1) {
+                return jsonString.length();
+            }
+
+            int endPositionOfLine = lineStartPosition;
+            while (jsonString.charAt(endPositionOfLine) != '\n') {
+                endPositionOfLine += 1;
+            }
+            return endPositionOfLine;
         }
     }
 }
