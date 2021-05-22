@@ -3,6 +3,11 @@
 # View as JSON Changelog
 
 ## [Unreleased]
+
+### Added
+
+- "Copy interval" button to copy the lines between matching brackets
+
 ## [0.2.0]
 
 ### Added
