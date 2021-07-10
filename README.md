@@ -11,6 +11,7 @@ Using this **IntelliJ** plugin, you can:
 * Highlight bracket pairs as you move through lines
 * Scroll through matching bracket line
 * Copy formatted JSON string seen on the text pane entirely or partially
+* Replace selected JSON string with the prettified version
 
 ## How to use it?
 * There are two use cases where **View as JSON** button will be visible:
@@ -22,6 +23,7 @@ Using this **IntelliJ** plugin, you can:
 * Click **View as JSON**
   * Click **Copy all** button if you want to copy the entire text
   * Click **Copy interval** button if you want to copy the lines between matching brackets
+  * Click **Replace selected** button if you want to replace the selected JSON string with the prettified version
 * Enjoy!
     * Use arrow keys or mouse clicks to move through lines
     * Use **Space** to scroll through matching bracket line if there is any
