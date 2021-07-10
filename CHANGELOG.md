@@ -3,6 +3,11 @@
 # View as JSON Changelog
 
 ## [Unreleased]
+
+### Added
+
+- "Replace selected" button to replace the selected JSON string with the prettified version
+
 ## [0.3.0]
 
 ### Added
