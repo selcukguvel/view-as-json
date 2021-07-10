@@ -1,5 +1,6 @@
 package dialog;
 
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.ui.JBUI;
@@ -20,12 +21,21 @@ import java.awt.event.ActionEvent;
 public class JsonViewerDialog extends DialogWrapper {
     private final JsonTextPane jsonTextPane;
     private final JScrollPane scrollPane;
+    private final AnActionEvent actionEvent;
+    private final ReplaceSelectedActionFunction replaceSelectedActionCallback;
 
-    public JsonViewerDialog(String jsonString) throws BadLocationException {
+    public JsonViewerDialog(
+        String jsonString,
+        AnActionEvent actionEvent,
+        ReplaceSelectedActionFunction replaceSelectedActionCallback
+    ) throws BadLocationException {
         super(true);
 
         this.scrollPane = new JBScrollPane();
         this.jsonTextPane = getJsonTextPane(jsonString);
+
+        this.actionEvent = actionEvent;
+        this.replaceSelectedActionCallback = replaceSelectedActionCallback;
 
         init();
         setTitle("View as JSON");
@@ -69,7 +79,11 @@ public class JsonViewerDialog extends DialogWrapper {
 
     @Override
     protected @NotNull Action[] createActions() {
-        return new Action[]{getCopyIntervalAction(), getCopyAllAction()};
+        return new Action[]{getCopyIntervalAction(), getCopyAllAction(), getReplaceSelectedAction()};
+    }
+
+    private Action getReplaceSelectedAction() {
+        return new ReplaceSelectedAction();
     }
 
     private Action getCopyAllAction() {
@@ -78,6 +92,18 @@ public class JsonViewerDialog extends DialogWrapper {
 
     private Action getCopyIntervalAction() {
         return new CopyIntervalAction();
+    }
+
+    private class ReplaceSelectedAction extends DialogWrapperAction {
+        protected ReplaceSelectedAction() {
+            super("Replace selected");
+        }
+
+        @Override
+        protected void doAction(ActionEvent e) {
+            String formattedText = jsonTextPane.getTextComponent().getText();
+            replaceSelectedActionCallback.apply(actionEvent, formattedText);
+        }
     }
 
     private class CopyAllAction extends DialogWrapperAction {

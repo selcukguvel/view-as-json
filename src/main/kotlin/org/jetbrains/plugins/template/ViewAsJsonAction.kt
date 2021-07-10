@@ -10,7 +10,11 @@ import com.google.gson.JsonSyntaxException
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.actionSystem.CommonDataKeys
+import com.intellij.openapi.application.Application
+import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.command.CommandProcessor
 import com.intellij.openapi.editor.Caret
+import com.intellij.openapi.editor.Editor
 import com.intellij.openapi.fileEditor.impl.LoadTextUtil
 import com.intellij.openapi.util.TextRange
 import dialog.ErrorDialog
@@ -52,26 +56,52 @@ class ViewAsJsonAction : AnAction() {
             errorDialog.setResizable(false)
             errorDialog.show()
         } else {
-            val jsonDialog = JsonViewerDialog(jsonString)
+            val jsonDialog = JsonViewerDialog(jsonString, e, this::performReplaceSelectedAction)
             jsonDialog.setResizable(false)
             jsonDialog.show()
         }
     }
 
+    private fun performReplaceSelectedAction(e: AnActionEvent, formattedText: String) {
+        val application: Application = ApplicationManager.getApplication()
+        val editor = e.getRequiredData(CommonDataKeys.EDITOR)
+        CommandProcessor.getInstance().executeCommand(
+            e.project,
+            {
+                application.runWriteAction {
+                    val selectedTextRange = getSelectedTextRange(editor)
+                    if (selectedTextRange.length > 0) {
+                        val document = editor.document
+                        document.replaceString(
+                            selectedTextRange.startOffset,
+                            selectedTextRange.endOffset,
+                            formattedText
+                        )
+                    }
+                }
+            },
+            "Replace selected",
+            null
+        )
+    }
+
     private fun getSelectedText(e: AnActionEvent): String {
         val editor = e.getRequiredData(CommonDataKeys.EDITOR)
         val document = editor.document
+        return document.getText(getSelectedTextRange(editor))
+    }
 
+    private fun getSelectedTextRange(editor: Editor): TextRange {
         val primaryCaret: Caret = editor.caretModel.primaryCaret
         val start: Int = primaryCaret.selectionStart
         val end: Int = primaryCaret.selectionEnd
 
-        return document.getText(TextRange.create(start, end))
+        return TextRange.create(start, end)
     }
 
     private fun getTextFromJsonFile(e: AnActionEvent): String {
-        val virtualFile = e.getData(CommonDataKeys.VIRTUAL_FILE)
-        return LoadTextUtil.loadText(virtualFile!!).toString()
+        val virtualFile = e.getRequiredData(CommonDataKeys.VIRTUAL_FILE)
+        return LoadTextUtil.loadText(virtualFile).toString()
     }
 
     private fun getJsonString(content: String?): String? {
