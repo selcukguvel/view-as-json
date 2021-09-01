@@ -30,7 +30,7 @@ repositories {
 }
 dependencies {
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.15.0")
-    testImplementation("org.mockito:mockito-inline:3.4.0")
+    testImplementation("org.mockito:mockito-inline:3.12.4")
 }
 
 // Configure gradle-intellij-plugin plugin.
