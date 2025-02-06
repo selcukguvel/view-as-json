@@ -43,4 +43,4 @@ Using this **IntelliJ** plugin, you can:
   
 ## Resources
 
-- Rob Camick's [LinePainter](http://www.camick.com/java/source/LinePainter.java) is adapted to implement line highlighting feature
+- Rob Camick's LinePainter code is adapted to implement line highlighting feature
